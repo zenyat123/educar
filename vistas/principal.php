@@ -39,8 +39,8 @@
 				
 				<li class = "active"><a data-toggle = "tab" href = "#estudiantes">Estudiantes</a></li>
 				<li><a data-toggle = "tab" href = "#materias">Materias</a></li>
-				<li><a data-toggle = "tab" href = "#registros">Registros</a></li>
 				<li><a data-toggle = "tab" href = "#incripciones">Inscripciones</a></li>
+				<li><a data-toggle = "tab" href = "#registros">Registros</a></li>
  
 			</ul>
 
@@ -56,7 +56,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "text" name = "documento" id = "documento" class = "form-control" required>
+								<input type = "text" id = "documento" class = "form-control" required>
 
 							</div>
 
@@ -68,7 +68,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "text" name = "nombres" id = "nombres" class = "form-control" required>
+								<input type = "text" id = "nombres" class = "form-control" required>
 
 							</div>
 
@@ -80,7 +80,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "text" name = "apellidos" id = "apellidos" class = "form-control" required>
+								<input type = "text" id = "apellidos" class = "form-control" required>
 
 							</div>
 
@@ -92,7 +92,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "text" name = "telefono" id = "telefono" class = "form-control">
+								<input type = "text" id = "telefono" class = "form-control">
 
 							</div>
 
@@ -104,7 +104,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "email" name = "email" id = "email" class = "form-control" required>
+								<input type = "email" id = "email" class = "form-control" required>
 
 							</div>
 
@@ -112,7 +112,7 @@
 
 						<div class = "form-group">
 
-							<div class = "col-xs-offset-10 col-xs-2">
+							<div class = "col-xs-offset-11 col-xs-1">
 							 
 								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarEstudiante">Registrar</button>
 
@@ -134,7 +134,7 @@
 
 							<div class = "col-xs-9">
 								
-								<input type = "text" name = "materia" id = "materia" class = "form-control" required>
+								<input type = "text" id = "materia" class = "form-control" required>
 
 							</div>
 
@@ -146,10 +146,10 @@
 
 							<div class = "col-xs-9">
 								
-								<select name = "profesion" id = "profesion" class = "form-control">
+								<select id = "profesion" class = "form-control">
 									
-									<option value = "Ingenieria">Ingenieria</option>
-									<option value = "Administracion">Administración</option>
+									<option value = "Ingeniería">Ingeniería</option>
+									<option value = "Administración">Administración</option>
 									<option value = "Cultura">Cultura</option>
 									<option value = "Mercadeo">Mercadeo</option>
 
@@ -161,7 +161,7 @@
 
 						<div class = "form-group">
 
-							<div class = "col-xs-offset-10 col-xs-2">
+							<div class = "col-xs-offset-11 col-xs-1">
 							 
 								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarMateria">Registrar</button>
 
@@ -171,6 +171,82 @@
 
 					</form>
 					
+				</div>
+
+				<div id = "incripciones" class = "tab-pane fade">
+					
+					<form method = "post" class = "form-horizontal formulario">
+						
+						<div class = "form-group">
+							
+							<label for = "materia" class = "col-xs-3">Materia</label>
+
+							<div class = "col-xs-9">
+
+								<select class = "form-control" id = "materiaCurso">
+
+									<option></option>
+								
+									<?php
+
+										$materias = ControladorMaterias::ControladorConsultarMaterias();
+
+										foreach($materias as $llave => $materia) 
+										{
+
+											echo "<option value = '".$materia["id_materia"]."'>".$materia["materia"]."</option>";
+											
+										}
+
+									?>
+
+								</select>
+
+							</div>
+
+						</div>
+
+						<div class = "form-group">
+							
+							<label for = "estudiante" class = "col-xs-3">Estudiante</label>
+
+							<div class = "col-xs-9">
+								
+								<select class = "form-control" id = "estudianteCurso">
+									
+									<option></option>
+
+									<?php
+
+										$estudiantes = ControladorEstudiantes::ControladorConsultarEstudiantes();
+
+										foreach($estudiantes as $llave => $estudiante)
+										{
+
+											echo "<option value = '".$estudiante["documento"]."'>".$estudiante["nombres"]." ".$estudiante["apellidos"]."</option>";
+
+										}
+
+									?>
+
+								</select>
+
+							</div>
+
+						</div>
+
+						<div class = "form-group">
+
+							<div class = "col-xs-offset-11 col-xs-1">
+								
+								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarCurso">Registrar</button>
+
+							</div>
+
+						</div>
+
+					</form>
+
 				</div>
 
 				<div id = "registros" class = "tab-pane fade">
@@ -225,27 +301,30 @@
 
 					</div>
 
-				</div>
-
-				<div id = "incripciones" class = "tab-pane fade">
-
 					<h1 class = "text-primary titulo">Cursos</h1>
 
-					<form method = "post" class = "form-horizontal formulario">
-						
-						<div class = "form-group">
+					<div class = "col-xs-12" id = "panel-tabla">
+
+						<table class = "table table-bordered tablaCursos">
 							
-							<label for = "materia" class = "col-xs-3">Materia</label>
-
-							<div class = "col-xs-9">
+							<thead>
 								
-								<input type = "text" name = "materia" class = "form-control">
+								<tr>
+									
+									<th>Código</th>
+									<th>Profesión</th>
+									<th>Materia</th>
+									<th>Estudiante</th>
+									<th></th>
+									<th></th>
 
-							</div>
+								</tr>
+	
+							</thead>
 
-						</div>
+						</table>
 
-					</form>
+					</div>
 
 				</div>
 

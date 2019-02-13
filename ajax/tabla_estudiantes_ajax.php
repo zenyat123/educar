@@ -6,6 +6,9 @@
 	class AjaxTablaEstudiantes
 	{
 
+		/*======  Consultar Estudiantes  ======*/
+		
+
 		public function AjaxConsultarEstudiantes()
 		{
 
@@ -23,10 +26,7 @@
 						[';
 
 							for($i = 0; $i < count($estudiantes); $i++)
-							{
-
-								/*======  Consultar Estudiantes  ======*/
-
+							{								
 
 								$editar = "<button type = 'submit' class = 'btn btn-warning'>Editar</button>";
 
