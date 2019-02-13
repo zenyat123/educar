@@ -9,7 +9,9 @@
 		public function ControladorRegistrarCurso($datos)
 		{
 
-			$respuesta = ModeloCursos::ModeloRegistrarCurso($datos);
+			$tabla = "curso";
+
+			$respuesta = ModeloCursos::ModeloRegistrarCurso($tabla, $datos);
 
 			return $respuesta;
 
@@ -21,7 +23,9 @@
 		public function ControladorConsultarCursos()
 		{
 
-			$respuesta = ModeloCursos::ModeloConsultarCursos();
+			$tabla = "curso";
+
+			$respuesta = ModeloCursos::ModeloConsultarCursos($tabla);
 
 			return $respuesta;
 

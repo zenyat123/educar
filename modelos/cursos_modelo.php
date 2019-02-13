@@ -8,10 +8,10 @@
 		/*====== Registrar Curso  ======*/
 
 
-		public function ModeloRegistrarCurso($datos)
+		public function ModeloRegistrarCurso($tabla, $datos)
 		{
 
-			$registrar = Conexion::Conectar()->prepare("insert into curso (id_materia, id_estudiante) values (:materia, :estudiante)");
+			$registrar = Conexion::Conectar()->prepare("insert into $tabla (id_materia, id_estudiante) values (:materia, :estudiante)");
 
 			$registrar -> bindParam(":materia", $datos["materia"]);
 			$registrar -> bindParam(":estudiante", $datos["estudiante"]);
@@ -32,10 +32,10 @@
 		/*====== Consultar Cursos  ======*/
 
 
-		public function ModeloConsultarCursos()
+		public function ModeloConsultarCursos($tabla)
 		{
 
-			$consultar = Conexion::Conectar()->prepare("select * from curso inner join materia on curso.id_materia = materia.id_materia
+			$consultar = Conexion::Conectar()->prepare("select * from $tabla inner join materia on curso.id_materia = materia.id_materia
 																			inner join estudiante on curso.id_estudiante = estudiante.documento");
 
 			$consultar -> execute();

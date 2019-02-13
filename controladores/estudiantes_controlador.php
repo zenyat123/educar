@@ -9,7 +9,9 @@
 		public function ControladorRegistrarEstudiante($datos)
 		{
 
-			$respuesta = ModeloEstudiantes::ModeloRegistrarEstudiante($datos);
+			$tabla = "estudiante";
+
+			$respuesta = ModeloEstudiantes::ModeloRegistrarEstudiante($tabla, $datos);
 
 			return $respuesta;
 
@@ -21,7 +23,9 @@
 		public function ControladorConsultarEstudiantes()
 		{
 
-			$respuesta = ModeloEstudiantes::ModeloConsultarEstudiantes();
+			$tabla = "estudiante";
+
+			$respuesta = ModeloEstudiantes::ModeloConsultarEstudiantes($tabla);
 
 			return $respuesta;
 

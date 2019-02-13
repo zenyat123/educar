@@ -9,7 +9,9 @@
 		public function ControladorRegistrarMateria($datos)
 		{
 
-			$respuesta = ModeloMaterias::ModeloRegistrarMateria($datos);
+			$tabla = "materia";
+
+			$respuesta = ModeloMaterias::ModeloRegistrarMateria($tabla, $datos);
 
 			return $respuesta;
 
@@ -21,7 +23,9 @@
 		public function ControladorConsultarMaterias()
 		{
 
-			$respuesta = ModeloMaterias::ModeloConsultarMaterias();
+			$tabla = "materia";
+
+			$respuesta = ModeloMaterias::ModeloConsultarMaterias($tabla);
 
 			return $respuesta;
 

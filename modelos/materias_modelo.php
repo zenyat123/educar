@@ -8,10 +8,10 @@
 		/*====== Registrar Materia  ======*/
 
 
-		public function ModeloRegistrarMateria($datos)
+		public function ModeloRegistrarMateria($tabla, $datos)
 		{
 
-			$registrar = Conexion::Conectar()->prepare("insert into materia (materia, profesion) values (:materia, :profesion)");
+			$registrar = Conexion::Conectar()->prepare("insert into $tabla (materia, profesion) values (:materia, :profesion)");
 
 			$registrar -> bindParam(":materia" , $datos["materia"]);
 			$registrar -> bindParam(":profesion" , $datos["profesion"]);
@@ -32,10 +32,10 @@
 		/*====== Consultar Materias  ======*/
 		
 
-		public function ModeloConsultarMaterias()
+		public function ModeloConsultarMaterias($tabla)
 		{
 
-			$consultar = Conexion::Conectar()->prepare("select * from materia");
+			$consultar = Conexion::Conectar()->prepare("select * from $tabla");
 			
 			$consultar -> execute();
 			

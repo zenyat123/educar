@@ -8,10 +8,10 @@
 		/*====== Registrar Estudiante  ======*/
 
 
-		public function ModeloRegistrarEstudiante($datos)
+		public function ModeloRegistrarEstudiante($tabla, $datos)
 		{
 
-			$registrar = Conexion::Conectar()->prepare("insert into estudiante (documento, nombres, apellidos, telefono, email) values (:documento, :nombres, :apellidos, :telefono, :email)");
+			$registrar = Conexion::Conectar()->prepare("insert into $tabla (documento, nombres, apellidos, telefono, email) values (:documento, :nombres, :apellidos, :telefono, :email)");
 
 			$registrar -> bindParam(":documento" , $datos["documento"]);
 			$registrar -> bindParam(":nombres" , $datos["nombres"]);
@@ -35,10 +35,10 @@
 		/*====== Consultar Estudiante  ======*/
 		
 
-		public function ModeloConsultarEstudiantes()
+		public function ModeloConsultarEstudiantes($tabla)
 		{
 
-			$consultar = Conexion::Conectar()->prepare("select * from estudiante");
+			$consultar = Conexion::Conectar()->prepare("select * from $tabla");
 			
 			$consultar -> execute();
 			

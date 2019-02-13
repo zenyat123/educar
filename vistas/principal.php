@@ -18,12 +18,14 @@
 	<link href = "<?php echo $servidor ?>/css/datatables-bootstrap.css" rel = "stylesheet">	
 	<link href = "<?php echo $servidor ?>/css/datatables-responsive.css" rel = "stylesheet">
 	<link href = "<?php echo $servidor ?>/css/font-awesome.css" rel = "stylesheet">
+	<link href = "<?php echo $servidor ?>/css/sweetalert.css" rel = "stylesheet">
 
 	<script src = "<?php echo $servidor ?>/js/jquery.js"></script>
 	<script src = "<?php echo $servidor ?>/js/bootstrap.js"></script>
 	<script src = "<?php echo $servidor ?>/js/datatables-jquery.js"></script>
 	<script src = "<?php echo $servidor ?>/js/datatables-bootstrap.js"></script>
 	<script src = "<?php echo $servidor ?>/js/datatables-responsive.js"></script>
+	<script src = "<?php echo $servidor ?>/js/sweetalert.js"></script>
 
 </head>
 
@@ -112,9 +114,9 @@
 
 						<div class = "form-group">
 
-							<div class = "col-xs-offset-11 col-xs-1">
-							 
-								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarEstudiante">Registrar</button>
+							<div class = "col-xs-offset-11 col-xs-1">							
+
+								<input type = "button" class = "btn btn-primary boton" id = "botonRegistrarEstudiante" value = "Registrar">
 
 							</div>
 
@@ -162,8 +164,8 @@
 						<div class = "form-group">
 
 							<div class = "col-xs-offset-11 col-xs-1">
-							 
-								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarMateria">Registrar</button>
+
+								<input type = "button" class = "btn btn-primary boton" id = "botonRegistrarMateria" value = "Registrar">
 
 							</div>
 
@@ -238,8 +240,8 @@
 						<div class = "form-group">
 
 							<div class = "col-xs-offset-11 col-xs-1">
-								
-								<button type = "submit" class = "btn btn-primary boton" id = "botonRegistrarCurso">Registrar</button>
+
+								<input type = "button" class = "btn btn-primary boton" id = "botonRegistrarCurso" value = "Registrar">							
 
 							</div>
 

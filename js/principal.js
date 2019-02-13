@@ -34,7 +34,40 @@ $("#botonRegistrarEstudiante").click(function()
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(){}
+		success: function(respuesta)
+		{
+
+			if(respuesta == "Registrado")
+			{
+
+				swal
+				({
+
+					title: "Registrado",
+					text: "Estudiante registrado correctamente",
+					type: "success",
+					confirmButtonText: "Bien",
+					confirmButtonColor: "#337ab7"
+				  
+				},
+
+				function(isConfirm)
+				{
+
+					if(isConfirm)
+					{
+
+						window.location = "";
+
+					}
+
+				}
+
+				);
+
+			}
+
+		}
 
 	})
 
@@ -63,7 +96,40 @@ $("#botonRegistrarMateria").click(function()
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(){}
+		success: function(respuesta)
+		{
+
+			if(respuesta == "Registrado")
+			{
+
+				swal
+				({
+
+					title: "Registrada",
+					text: "Meteria registrada correctamente",
+					type: "success",
+					confirmButtonText: "Bien",
+					confirmButtonColor: "#337ab7"
+				  
+				},
+
+				function(isConfirm)
+				{
+
+					if(isConfirm)
+					{
+
+						window.location = "";
+
+					}
+
+				}
+
+				);
+
+			}
+
+		}
 
 	})
 
@@ -92,7 +158,40 @@ $("#botonRegistrarCurso").click(function()
 		cache: false,
 		contentType: false,
 		processData: false,
-		success: function(){}
+		success: function(respuesta)
+		{
+
+			if(respuesta == "Registrado")
+			{
+
+				swal
+				({
+
+					title: "Registrado",
+					text: "Curso registrado correctamente",
+					type: "success",
+					confirmButtonText: "Bien",
+					confirmButtonColor: "#337ab7"
+				  
+				},
+
+				function(isConfirm)
+				{
+
+					if(isConfirm)
+					{
+
+						window.location = "";
+
+					}
+
+				}
+
+				);
+
+			}
+
+		}
 
 	})
 
