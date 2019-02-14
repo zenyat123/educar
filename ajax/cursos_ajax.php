@@ -15,12 +15,36 @@
 		public function AjaxRegistrarCurso()
 		{
 
-			$datos = array("materia" => $this -> materia, "estudiante" => $this -> estudiante);
+			$campo_uno = "id_materia";
 
-			$respuesta = ControladorCursos::ControladorRegistrarCurso($datos);
+			$valor_uno = $_POST["materia"];
 
-			echo $respuesta;
+			$campo_dos = "id_estudiante";
 
+			$valor_dos = $_POST["estudiante"];
+
+			/*====== Consultar Curso  ======*/
+
+
+			$respuesta = ControladorCursos::ControladorConsultarCursos($campo_uno, $valor_uno, $campo_dos, $valor_dos);
+
+			if($respuesta["id_materia"] == $_POST["materia"] && $respuesta["id_estudiante"] == $_POST["estudiante"])
+			{
+
+				echo "Advertencia";
+
+			}
+			else
+			{
+
+				$datos = array("materia" => $this -> materia, "estudiante" => $this -> estudiante);
+
+				$respuesta = ControladorCursos::ControladorRegistrarCurso($datos);
+
+				echo $respuesta;
+
+			}
+			
 		}
 
 	}

@@ -17,15 +17,15 @@
 
 		}
 
-		/*====== Consultar Estudiante  ======*/
+		/*====== Consultar Estudiantes  ======*/
 
 
-		public function ControladorConsultarEstudiantes()
+		public function ControladorConsultarEstudiantes($campo, $valor)
 		{
 
 			$tabla = "estudiante";
 
-			$respuesta = ModeloEstudiantes::ModeloConsultarEstudiantes($tabla);
+			$respuesta = ModeloEstudiantes::ModeloConsultarEstudiantes($tabla, $campo, $valor);
 
 			return $respuesta;
 

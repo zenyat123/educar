@@ -12,7 +12,10 @@
 		public function AjaxConsultarEstudiantes()
 		{
 
-			$estudiantes = ControladorEstudiantes::ControladorConsultarEstudiantes();
+			$campo = "";
+			$valor = "";
+
+			$estudiantes = ControladorEstudiantes::ControladorConsultarEstudiantes($campo, $valor);
 
 			if($estudiantes)
 			{
@@ -33,6 +36,7 @@
 								$eliminar = "<button type = 'submit' class = 'btn btn-danger'>Eliminar</button>";
 								 
 								$datos_json .= '  
+								
 									[
 										"'.$estudiantes[$i]["documento"].'",
 										"'.$estudiantes[$i]["nombres"].'",

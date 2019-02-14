@@ -32,17 +32,38 @@
 
 		}
 
-		/*====== Consultar Estudiante  ======*/
+		/*====== Consultar Estudiantes  ======*/
 		
 
-		public function ModeloConsultarEstudiantes($tabla)
+		public function ModeloConsultarEstudiantes($tabla, $campo, $valor)
 		{
 
-			$consultar = Conexion::Conectar()->prepare("select * from $tabla");
-			
-			$consultar -> execute();
-			
-			return $consultar -> fetchAll();
+			if($campo == "")
+			{
+
+				$consultar = Conexion::Conectar()->prepare("select * from $tabla");
+				
+				$consultar -> execute();
+				
+				return $consultar -> fetchAll();
+
+			}
+			else
+			{
+
+				$consultar = Conexion::Conectar()->prepare("select * from $tabla where $campo = :valor");
+
+				$consultar -> bindParam(":valor", $valor);
+
+				$consultar -> execute();
+
+				return $consultar -> fetch();
+
+			}
+
+			$consultar -> close();
+
+			$consultar = null;
 
 		} 
 

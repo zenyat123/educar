@@ -5,6 +5,59 @@
 
 var servidor = $("#servidor").val();
 
+/*======  Reconocer Estudiante Repetido  ======*/
+
+
+var verificado = true;
+
+$("#documento").change(function()
+{
+
+	var documento = $("#documento").val();
+
+	var datos = new FormData();
+
+	datos.append("verificarEstudiante", documento);
+
+	$.ajax
+	({
+
+		url: servidor + "/ajax/estudiantes_ajax.php",
+		method: "post",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function(respuesta)
+		{
+
+			if(respuesta != "false")
+			{
+
+				$(".container").after("<div class = 'alert alert-danger text-center col-xs-4 col-xs-offset-4'>" +
+
+											"<strong>Advertencia:</strong> El estudiante ya se encuentra registrado" +
+
+									  "</div>");
+
+				verificado = false;
+
+			}
+			else
+			{
+
+				$(".alert").remove();
+
+				verificado = true;
+
+			}
+
+		}
+
+	})
+
+})
+
 /*======  Botón Registrar Estudiante  ======*/
 
 
@@ -168,7 +221,7 @@ $("#botonRegistrarCurso").click(function()
 				({
 
 					title: "Registrado",
-					text: "Curso registrado correctamente",
+					text: "Estudiante registrado correctamente",
 					type: "success",
 					confirmButtonText: "Bien",
 					confirmButtonColor: "#337ab7"
@@ -188,6 +241,21 @@ $("#botonRegistrarCurso").click(function()
 				}
 
 				);
+
+			}
+			else
+			{
+
+				swal
+				({
+
+					title: respuesta,
+					text: "El o La estudiante ya se encuentra registrado en esa materia",
+					type: "error",
+					confirmButtonText: "Bien",
+					confirmButtonColor: "#337ab7"
+				  
+				});
 
 			}
 

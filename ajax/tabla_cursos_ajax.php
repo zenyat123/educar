@@ -12,7 +12,7 @@
 		public function AjaxConsultarCursos()
 		{
 
-			$cursos = ControladorCursos::ControladorConsultarCursos();
+			$cursos = ControladorCursos::ControladorConsultarCurso();
 
 			if($cursos)
 			{
@@ -27,9 +27,6 @@
 
 							for($i = 0; $i < count($cursos); $i++)
 							{
-
-								/*======  Consultar Cursos  ======*/
-
 
 								$editar = "<button type = 'submit' class = 'btn btn-warning'>Editar</button>";
 

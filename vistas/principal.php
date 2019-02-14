@@ -220,7 +220,10 @@
 
 									<?php
 
-										$estudiantes = ControladorEstudiantes::ControladorConsultarEstudiantes();
+										$campo = "";
+										$valor = "";
+
+										$estudiantes = ControladorEstudiantes::ControladorConsultarEstudiantes($campo, $valor);
 
 										foreach($estudiantes as $llave => $estudiante)
 										{

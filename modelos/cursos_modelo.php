@@ -32,11 +32,47 @@
 		/*====== Consultar Cursos  ======*/
 
 
-		public function ModeloConsultarCursos($tabla)
+		public function ModeloConsultarCursos($tabla, $campo_uno, $valor_uno, $campo_dos, $valor_dos)
+		{
+
+			if($campo_uno == "")
+			{
+
+				$consultar = Conexion::Conectar()->prepare("select * from $tabla");
+
+				$consultar -> execute();
+
+				return $consultar -> fetchAll();
+
+			}
+			else
+			{
+
+				$consultar = Conexion::Conectar()->prepare("select * from $tabla where $campo_uno = :valor_uno and $campo_dos = :valor_dos");
+
+				$consultar -> bindParam(":valor_uno", $valor_uno);
+				$consultar -> bindParam(":valor_dos", $valor_dos);
+
+				$consultar -> execute();
+
+				return $consultar -> fetch();
+
+			}
+
+			$consultar -> close();
+
+			$consultar = null;
+
+		}
+
+		/*====== Consultar Curso  ======*/
+
+
+		public function ModeloConsultarCurso($tabla)
 		{
 
 			$consultar = Conexion::Conectar()->prepare("select * from $tabla inner join materia on curso.id_materia = materia.id_materia
-																			inner join estudiante on curso.id_estudiante = estudiante.documento");
+																			 inner join estudiante on curso.id_estudiante = estudiante.documento");
 
 			$consultar -> execute();
 

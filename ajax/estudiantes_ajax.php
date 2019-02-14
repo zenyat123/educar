@@ -30,6 +30,22 @@
 
 		}
 
+		/*====== Reconocer Estudiante Repetido  ======*/
+
+
+		public function AjaxVerificarEstudiante()
+		{
+
+			$campo = "documento";
+
+			$valor = $this -> verificar_estudiante;
+
+			$respuesta = ControladorEstudiantes::ControladorConsultarEstudiantes($campo, $valor);
+
+			echo json_encode($respuesta);
+
+		}
+
 	}
 
 	/*====== Registrar Estudiante  ======*/
@@ -45,5 +61,17 @@
 		$registrar_estudiante -> telefono = $_POST["telefono"];
 		$registrar_estudiante -> email = $_POST["email"];
 		$registrar_estudiante -> AjaxRegistrarEstudiante();
+
+	}
+
+	/*====== Reconocer Estudiante Repetido  ======*/
+
+
+	if(isset($_POST["verificarEstudiante"]))
+	{
+
+		$verificar_estudiante = new AjaxEstudiantes();
+		$verificar_estudiante -> verificar_estudiante = $_POST["verificarEstudiante"];
+		$verificar_estudiante -> AjaxVerificarEstudiante();
 
 	}
