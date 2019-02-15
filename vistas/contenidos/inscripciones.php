@@ -8,13 +8,16 @@
 
 		<div class = "col-xs-9">
 
-			<select class = "form-control" id = "materiaCurso">
+			<select class = "form-control" id = "materiaClase">
 
 				<option></option>
 			
 				<?php
 
-					$materias = ControladorMaterias::ControladorConsultarMaterias();
+					$campo = "";
+					$valor = "";
+
+					$materias = ControladorMaterias::ControladorConsultarMaterias($campo, $valor);
 
 					foreach($materias as $llave => $materia) 
 					{
@@ -37,7 +40,7 @@
 
 		<div class = "col-xs-9">
 			
-			<select class = "form-control" id = "estudianteCurso">
+			<select class = "form-control" id = "estudianteClase">
 				
 				<option></option>
 
@@ -67,7 +70,7 @@
 
 		<div class = "col-xs-offset-11 col-xs-1">
 
-			<input type = "button" class = "btn btn-primary boton" id = "botonRegistrarCurso" value = "Registrar">							
+			<input type = "button" class = "btn btn-primary boton" id = "botonRegistrarClase" value = "Registrar">							
 
 		</div>
 

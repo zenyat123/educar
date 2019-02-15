@@ -5,11 +5,11 @@
 
 	require_once("controladores/estudiantes_controlador.php");
 	require_once("controladores/materias_controlador.php");
-	require_once("controladores/cursos_controlador.php");
+	require_once("controladores/clases_controlador.php");
 	
 	require_once("modelos/estudiantes_modelo.php");
 	require_once("modelos/materias_modelo.php");
-	require_once("modelos/cursos_modelo.php");
+	require_once("modelos/clases_modelo.php");
 
 	$principal = new ControladorPrincipal();
 	$principal -> Principal();

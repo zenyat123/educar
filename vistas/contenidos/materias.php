@@ -22,8 +22,9 @@
 			
 			<select id = "profesion" class = "form-control">
 				
+				<option></option>
 				<option value = "Ingeniería">Ingeniería</option>
-				<option value = "Administración">Administración</option>
+				<option value = "Administración de Empresas">Administración de Empresas</option>
 				<option value = "Cultura">Cultura</option>
 				<option value = "Mercadeo">Mercadeo</option>
 

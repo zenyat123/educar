@@ -30,6 +30,40 @@
 
 		}
 
+		/*====== Consultar Estudiante  ======*/
+
+
+		public function AjaxConsultarEstudiante()
+		{
+
+			$campo = "documento";
+
+			$valor = $this -> documento;
+
+			$respuesta = ControladorEstudiantes::ControladorConsultarEstudiantes($campo, $valor);
+
+			echo json_encode($respuesta);
+
+		}
+
+		/*======  Actualizar Estudiante  ======*/
+
+
+		public function AjaxActualizarEstudiante()
+		{
+
+			$datos = array("documento" => $this -> documento,
+						   "nombres" => $this -> nombres,
+						   "apellidos" => $this -> apellidos,
+						   "telefono" => $this -> telefono,
+						   "email" => $this -> email);
+
+			$respuesta = ControladorEstudiantes::ControladorActualizarEstudiante($datos);
+
+			echo $respuesta;
+
+		}
+
 		/*====== Reconocer Estudiante Repetido  ======*/
 
 
@@ -43,6 +77,22 @@
 			$respuesta = ControladorEstudiantes::ControladorConsultarEstudiantes($campo, $valor);
 
 			echo json_encode($respuesta);
+
+		}
+
+		/*======  Eliminar Estudiante  ======*/
+
+
+		public function AjaxEliminarEstudiante()
+		{
+
+			$campo = "documento";
+
+			$valor = $this -> documento;
+
+			$respuesta = ControladorEstudiantes::ControladorEliminarEstudiante($campo, $valor);
+
+			echo $respuesta;
 
 		}
 
@@ -64,6 +114,34 @@
 
 	}
 
+	/*====== Consultar Estudiante  ======*/
+
+
+	if(isset($_POST["consultarDocumento"]))
+	{
+
+		$consultar_estudiante = new AjaxEstudiantes();
+		$consultar_estudiante -> documento = $_POST["consultarDocumento"];
+		$consultar_estudiante -> AjaxConsultarEstudiante();
+
+	}
+
+	/*======  Actualizar Estudiante  ======*/
+
+
+	if(isset($_POST["actualizarDocumento"]))
+	{
+
+		$actualizar_estudiante = new AjaxEstudiantes();
+		$actualizar_estudiante -> documento = $_POST["actualizarDocumento"];
+		$actualizar_estudiante -> nombres = $_POST["actualizarNombres"];
+		$actualizar_estudiante -> apellidos = $_POST["actualizarApellidos"];
+		$actualizar_estudiante -> telefono = $_POST["actualizarTelefono"];
+		$actualizar_estudiante -> email = $_POST["actualizarEmail"];
+		$actualizar_estudiante -> AjaxActualizarEstudiante();
+
+	}
+
 	/*====== Reconocer Estudiante Repetido  ======*/
 
 
@@ -73,5 +151,17 @@
 		$verificar_estudiante = new AjaxEstudiantes();
 		$verificar_estudiante -> verificar_estudiante = $_POST["verificarEstudiante"];
 		$verificar_estudiante -> AjaxVerificarEstudiante();
+
+	}
+
+	/*======  Eliminar Estudiante  ======*/
+
+
+	if(isset($_POST["eliminarEstudiante"]))
+	{
+
+		$eliminar_estudiante = new AjaxEstudiantes();
+		$eliminar_estudiante -> documento = $_POST["eliminarEstudiante"];
+		$eliminar_estudiante -> AjaxEliminarEstudiante();
 
 	}

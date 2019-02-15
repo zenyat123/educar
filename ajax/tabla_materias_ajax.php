@@ -12,7 +12,10 @@
 		public function AjaxConsultarMaterias()
 		{
 
-			$materias = ControladorMaterias::ControladorConsultarMaterias();
+			$campo = "";
+			$valor = "";
+
+			$materias = ControladorMaterias::ControladorConsultarMaterias($campo, $valor);
 
 			if($materias)
 			{
@@ -28,9 +31,9 @@
 							for($i = 0; $i < count($materias); $i++)
 							{								
 
-								$editar = "<button type = 'submit' class = 'btn btn-warning'>Editar</button>";
+								$editar = "<button type = 'submit' class = 'btn btn-warning botonEditarMateria' codigo = '".$materias[$i]["id_materia"]."' data-toggle = 'modal' data-target = '#modalEditarMateria'>Editar</button>";
 
-								$eliminar = "<button type = 'submit' class = 'btn btn-danger'>Eliminar</button>";
+								$eliminar = "<button type = 'submit' class = 'btn btn-danger botonEliminarMateria' idMateria = '".$materias[$i]["id_materia"]."' materia = '".$materias[$i]["materia"]."'>Eliminar</button>";
 								 
 								$datos_json .= ' 
 

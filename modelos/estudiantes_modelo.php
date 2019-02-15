@@ -67,4 +67,68 @@
 
 		} 
 
+		/*======  Actualizar Estudiante  ======*/
+
+
+		public function ModeloActualizarEstudiante($tabla, $datos)
+		{
+
+			$actualiza = "update $tabla set nombres = :nombres, apellidos = :apellidos, telefono = :telefono, email = :email where documento = :documento";
+
+			$actualizar = Conexion::Conectar()->prepare($actualiza);
+
+			$actualizar -> bindParam(":documento", $datos["documento"]);
+			$actualizar -> bindParam(":nombres", $datos["nombres"]);
+			$actualizar -> bindParam(":apellidos", $datos["apellidos"]);
+			$actualizar -> bindParam(":telefono", $datos["telefono"]);
+			$actualizar -> bindParam(":email", $datos["email"]);
+
+			if($actualizar -> execute())
+			{
+
+				return "Actualizado";
+
+			}
+			else
+			{
+
+				return $actualizar -> errorInfo();
+
+			}
+
+			$actualizar -> close();
+
+			$actualizar = null;
+
+		}
+
+		/*======  Eliminar Estudiante  ======*/
+
+
+		public function ModeloEliminarEstudiante($tabla, $campo, $valor)
+		{
+
+			$eliminar = Conexion::Conectar()->prepare("delete from $tabla where $campo = :valor");
+
+			$eliminar -> bindParam(":valor", $valor);
+
+			if($eliminar -> execute())
+			{
+
+				return "Eliminado";
+
+			}
+			else
+			{
+
+				return $eliminar -> errorInfo();
+
+			}
+
+			$eliminar -> close();
+
+			$eliminar = null;
+
+		}
+
 	}

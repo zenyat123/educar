@@ -31,9 +31,9 @@
 							for($i = 0; $i < count($estudiantes); $i++)
 							{								
 
-								$editar = "<button type = 'submit' class = 'btn btn-warning'>Editar</button>";
+								$editar = "<button type = 'submit' class = 'btn btn-warning botonEditarEstudiante' documento = '".$estudiantes[$i]["documento"]."' data-toggle = 'modal' data-target = '#modalEditarEstudiante'>Editar</button>";
 
-								$eliminar = "<button type = 'submit' class = 'btn btn-danger'>Eliminar</button>";
+								$eliminar = "<button type = 'submit' class = 'btn btn-danger botonEliminarEstudiante' documento = '".$estudiantes[$i]["documento"]."'>Eliminar</button>";
 								 
 								$datos_json .= '  
 								

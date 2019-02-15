@@ -2,13 +2,13 @@
 
 	require_once("conexion.php");
 
-	class ModeloCursos
+	class ModeloClases
 	{
 
-		/*====== Registrar Curso  ======*/
+		/*====== Registrar Clase  ======*/
 
 
-		public function ModeloRegistrarCurso($tabla, $datos)
+		public function ModeloRegistrarClase($tabla, $datos)
 		{
 
 			$registrar = Conexion::Conectar()->prepare("insert into $tabla (id_materia, id_estudiante) values (:materia, :estudiante)");
@@ -29,10 +29,10 @@
 
 		}
 
-		/*====== Consultar Cursos  ======*/
+		/*====== Consultar Clases  ======*/
 
 
-		public function ModeloConsultarCursos($tabla, $campo_uno, $valor_uno, $campo_dos, $valor_dos)
+		public function ModeloConsultarClases($tabla, $campo_uno, $valor_uno, $campo_dos, $valor_dos)
 		{
 
 			if($campo_uno == "")
@@ -65,14 +65,14 @@
 
 		}
 
-		/*====== Consultar Curso  ======*/
+		/*====== Consultar Clase  ======*/
 
 
-		public function ModeloConsultarCurso($tabla)
+		public function ModeloConsultarClase($tabla)
 		{
 
-			$consultar = Conexion::Conectar()->prepare("select * from $tabla inner join materia on curso.id_materia = materia.id_materia
-																			 inner join estudiante on curso.id_estudiante = estudiante.documento");
+			$consultar = Conexion::Conectar()->prepare("select * from $tabla inner join materia on clase.id_materia = materia.id_materia
+																			 inner join estudiante on clase.id_estudiante = estudiante.documento");
 
 			$consultar -> execute();
 

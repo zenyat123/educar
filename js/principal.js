@@ -114,9 +114,7 @@ $("#botonRegistrarEstudiante").click(function()
 
 					}
 
-				}
-
-				);
+				});
 
 			}
 
@@ -159,7 +157,7 @@ $("#botonRegistrarMateria").click(function()
 				({
 
 					title: "Registrada",
-					text: "Meteria registrada correctamente",
+					text: "Materia registrada correctamente",
 					type: "success",
 					confirmButtonText: "Bien",
 					confirmButtonColor: "#337ab7"
@@ -176,9 +174,7 @@ $("#botonRegistrarMateria").click(function()
 
 					}
 
-				}
-
-				);
+				});
 
 			}
 
@@ -188,14 +184,14 @@ $("#botonRegistrarMateria").click(function()
 
 })
 
-/*======  Botón Registrar Curso  ======*/
+/*======  Botón Registrar Clase  ======*/
 
 
-$("#botonRegistrarCurso").click(function()
+$("#botonRegistrarClase").click(function()
 {
 
-	var materia = $("#materiaCurso").val();
-	var estudiante = $("#estudianteCurso").val();
+	var materia = $("#materiaClase").val();
+	var estudiante = $("#estudianteClase").val();
 
 	var datos = new FormData();
 
@@ -205,7 +201,7 @@ $("#botonRegistrarCurso").click(function()
 	$.ajax
 	({
 
-		url: servidor + "/ajax/cursos_ajax.php",
+		url: servidor + "/ajax/clases_ajax.php",
 		method: "post",
 		data: datos,
 		cache: false,
@@ -238,9 +234,7 @@ $("#botonRegistrarCurso").click(function()
 
 					}
 
-				}
-
-				);
+				});
 
 			}
 			else
@@ -345,13 +339,13 @@ $(".tablaMaterias").DataTable
 
 })
 
-/*======  Cargar la Tabla Dinámica de Cursos  ======*/
+/*======  Cargar la Tabla Dinámica de Clases  ======*/
 
 
-$(".tablaCursos").DataTable
+$(".tablaClases").DataTable
 ({
 
-	"ajax": servidor + "/ajax/tabla_cursos_ajax.php",
+	"ajax": servidor + "/ajax/tabla_clases_ajax.php",
 	"deferRender": true,
 	"retrieve": true,
 	"processing": true,
@@ -382,6 +376,333 @@ $(".tablaCursos").DataTable
 		}
 
 	}
+
+})
+
+/*======  Actualizar Estudiante  ======*/
+
+
+$(".tablaEstudiantes tbody").on("click", ".botonEditarEstudiante", function()
+{
+
+	//  Consultar Estudiante
+
+	var documento = $(this).attr("documento");
+
+	var datos = new FormData();
+
+	datos.append("consultarDocumento", documento);
+
+	$.ajax
+	({
+
+		url: servidor + "/ajax/estudiantes_ajax.php",
+		method: "post",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(respuesta)
+		{
+
+			$("#modalEditarEstudiante .editarDocumento").val(respuesta["documento"]);
+			$("#modalEditarEstudiante .editarNombres").val(respuesta["nombres"]);
+			$("#modalEditarEstudiante .editarApellidos").val(respuesta["apellidos"]);
+			$("#modalEditarEstudiante .editarTelefono").val(respuesta["telefono"]);
+			$("#modalEditarEstudiante .editarEmail").val(respuesta["email"]);
+
+			//  Actualizar Estudiante
+
+			$(".botonActualizarEstudiante").click(function()
+			{
+
+				var documento = $("#modalEditarEstudiante .editarDocumento").val();
+				var nombres = $("#modalEditarEstudiante .editarNombres").val();
+				var apellidos = $("#modalEditarEstudiante .editarApellidos").val();
+				var telefono = $("#modalEditarEstudiante .editarTelefono").val();
+				var email = $("#modalEditarEstudiante .editarEmail").val();
+
+				var datos = new FormData();
+
+				datos.append("actualizarDocumento", documento);
+				datos.append("actualizarNombres", nombres);
+				datos.append("actualizarApellidos", apellidos);
+				datos.append("actualizarTelefono", telefono);
+				datos.append("actualizarEmail", email);
+
+				$.ajax
+				({
+
+					url: servidor + "/ajax/estudiantes_ajax.php",
+					method: "post",
+					data: datos,
+					cache: false,
+ 					contentType: false,
+ 					processData: false,
+ 					success: function(respuesta)
+ 					{
+
+ 						if(respuesta == "Actualizado")
+ 						{
+
+ 							swal
+							({
+
+								title: "Actualizado",
+								text: "Estudiante actualizado correctamente",
+								type: "success",
+								confirmButtonText: "Bien",
+								confirmButtonColor: "#337ab7"
+							  
+							},
+
+							function(isConfirm)
+							{
+
+								if(isConfirm)
+								{
+
+									window.location = "";
+
+								}
+
+							});
+
+ 						}
+
+ 					}
+
+				})
+
+			})
+
+		}
+
+	})
+
+})
+
+/*======  Eliminar Estudiante  ======*/
+
+
+$(".tablaEstudiantes tbody").on("click", ".botonEliminarEstudiante", function()
+{
+
+	// Consultar Estudiante
+
+	var documento = $(this).attr("documento");
+
+	swal
+	({
+
+		title: "¿Está seguro de eliminar el Estudiante con número de documento: " + documento + "?",
+		text: "Si no lo está puede cancelar la acción",
+		type: "warning",
+		confirmButtonText: "Eliminar",
+		confirmButtonColor: "#DD6B55",
+		showCancelButton: true,
+		cancelButtonText: "Cancelar"
+	  
+	},
+
+	function(isConfirm)
+	{
+
+		if(isConfirm)
+		{
+
+			var datos = new FormData();
+
+			datos.append("eliminarEstudiante", documento);
+
+			$.ajax
+			({
+
+				url: servidor + "/ajax/estudiantes_ajax.php",
+				method: "post",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(respuesta)
+				{
+
+					if(respuesta == "Eliminado")
+					{
+
+						window.location = "";
+
+					}
+
+				}
+
+			})
+
+		}
+
+	}); 		
+
+})
+
+/*======  Actualizar Materia  ======*/
+
+
+$(".tablaMaterias tbody").on("click", ".botonEditarMateria", function()
+{
+
+	//  Consultar Materia
+
+	var codigo = $(this).attr("codigo");
+
+	var datos = new FormData();
+
+	datos.append("codigo", codigo);
+
+	$.ajax
+	({
+
+		url: servidor + "/ajax/materias_ajax.php",
+		method: "post",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(respuesta)
+		{
+
+			$("#modalEditarMateria .editarCodigo").val(respuesta["id_materia"]);
+			$("#modalEditarMateria .editarMateria").val(respuesta["materia"]);
+			$("#modalEditarMateria .editarProfesion").val(respuesta["profesion"]);
+
+			//  Actualizar Materia
+
+			$(".botonActualizarMateria").click(function()
+			{
+
+				var codigo = $("#modalEditarMateria .editarCodigo").val();
+				var materia = $("#modalEditarMateria .editarMateria").val();
+				var profesion = $("#modalEditarMateria .editarProfesion").val();
+
+				var datos = new FormData();
+
+				datos.append("actualizarCodigo", codigo);
+				datos.append("actualizarMateria", materia);
+				datos.append("actualizarProfesion", profesion);
+
+				$.ajax
+				({
+
+					url: servidor + "/ajax/materias_ajax.php",
+					method: "post",
+					data: datos,
+					cache: false,
+ 					contentType: false,
+ 					processData: false,
+ 					success: function(respuesta)
+ 					{
+
+ 						if(respuesta == "Actualizado")
+ 						{
+
+ 							swal
+							({
+
+								title: "Actualizado",
+								text: "Materia actualizada correctamente",
+								type: "success",
+								confirmButtonText: "Bien",
+								confirmButtonColor: "#337ab7"
+							  
+							},
+
+							function(isConfirm)
+							{
+
+								if(isConfirm)
+								{
+
+									window.location = "";
+
+								}
+
+							});
+
+ 						}
+
+ 					}
+
+				})
+
+			})
+
+		}
+
+	})
+
+})
+
+/*======  Eliminar Materia  ======*/
+
+
+$(".tablaMaterias tbody").on("click", ".botonEliminarMateria", function()
+{
+
+	//  Consultar Materia
+
+	var idMateria = $(this).attr("idMateria");
+	var materia = $(this).attr("materia");
+
+	swal
+	({
+
+		title: "¿Está seguro de eliminar la materia: " + materia + "?",
+		text: "Si no lo está puede cancelar la acción",
+		type: "warning",
+		confirmButtonText: "Eliminar",
+		confirmButtonColor: "#DD6B55",
+		showCancelButton: true,
+		cancelButtonText: "Cancelar"
+	  
+	},
+
+	function(isConfirm)
+	{
+
+		if(isConfirm)
+		{
+
+			var datos = new FormData();
+
+			datos.append("eliminarMateria", idMateria);
+
+			$.ajax
+			({
+
+				url: servidor + "/ajax/materias_ajax.php",
+				method: "post",
+				data: datos,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function(respuesta)
+				{
+
+					if(respuesta == "Eliminado")
+					{
+
+						window.location = "";
+
+					}
+
+				}
+
+			})
+
+		}
+
+	});
 
 })
 

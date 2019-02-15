@@ -31,4 +31,32 @@
 
 		}
 
+		/*======  Actualizar Estudiante  ======*/
+
+
+		public function ControladorActualizarEstudiante($datos)
+		{
+
+			$tabla = "estudiante";
+
+			$respuesta = ModeloEstudiantes::ModeloActualizarEstudiante($tabla, $datos);
+
+			return $respuesta;
+
+		}
+
+		/*======  Eliminar Estudiante  ======*/
+
+
+		public function ControladorEliminarEstudiante($campo, $valor)
+		{
+
+			$tabla = "estudiante";
+
+			$respuesta = ModeloEstudiantes::ModeloEliminarEstudiante($tabla, $campo, $valor);
+
+			return $respuesta;
+
+		}
+
 	}
