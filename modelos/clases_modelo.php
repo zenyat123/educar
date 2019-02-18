@@ -79,5 +79,21 @@
 			return $consultar -> fetchAll();
 
 		}
+        
+        /*====== Consultar Clase con número maximo de estudiantes  ======*/
+        
+        
+        public function ModeloMaximaClase($tabla, $campo, $valor)
+        {            
+            
+            $consultar = Conexion::Conectar()->prepare("select count(id_estudiante) as estudiantes from $tabla where $campo = :valor");
+            
+            $consultar -> bindParam(":valor", $valor);
+            
+            $consultar -> execute();
+            
+            return $consultar -> fetch();
+            
+        }
 
 	}

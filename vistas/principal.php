@@ -72,7 +72,7 @@
 					
 					<?php
 
-						include("contenidos/inscripciones.php");
+						include("contenidos/clases.php");
 
 					?>
 

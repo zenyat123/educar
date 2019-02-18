@@ -23,8 +23,7 @@
 
 			$valor_dos = $_POST["estudiante"];
 
-			/*====== Consultar Clase  ======*/
-
+			//  Consultar Clase   
 
 			$respuesta = ControladorClases::ControladorConsultarClases($campo_uno, $valor_uno, $campo_dos, $valor_dos);
 
@@ -36,12 +35,36 @@
 			}
 			else
 			{
+                
+                //  Consultar Clase con número maximo de estudiantes
+                
+                
+                $campo = "id_materia";
+                
+                $valor = $_POST["materia"];
+                   
+                $respuesta = ControladorClases::ControladorMaximaClase($campo, $valor);
+                
+                if($respuesta["estudiantes"] >= 5)
+                {
+                    
+                    
+                    echo "Maxima";
+                    
+                    
+                }
+                else
+                {
+                    
+                    $datos = array("materia" => $this -> materia, "estudiante" => $this -> estudiante);
 
-				$datos = array("materia" => $this -> materia, "estudiante" => $this -> estudiante);
+				    $respuesta = ControladorClases::ControladorRegistrarClase($datos);
 
-				$respuesta = ControladorClases::ControladorRegistrarClase($datos);
+				    echo $respuesta;
 
-				echo $respuesta;
+                    
+                }
+                
 
 			}
 			

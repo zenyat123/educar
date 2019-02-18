@@ -5,6 +5,99 @@
 
 var servidor = $("#servidor").val();
 
+
+/*======  Validar Formulario Registro de Estudiante  ======*/
+
+
+function ValidarEstudiante()
+{
+    
+    //  Validar número de documento
+    
+    var documento = $("#documento").val();
+    
+    if(documento != "")
+    {
+        
+        var expresion = /^[0-9]*$/;
+        
+        if(!expresion.test(documento))
+        {
+            
+            $(".container").after("<div class = 'alert alert-danger col-md-4 col-md-offset-4 text-center'><strong>Advertencia: </strong>El campo de documento debe ser numérico</div>");
+            
+            return false;
+            
+        }
+        
+    }
+    
+    //  Validar nombres y apellidos
+    
+    var nombres = $("#nombres").val();
+    
+    var apellidos = $("#apellidos").val();
+    
+    if(nombres != "" && apellidos != "")
+    {
+        
+        var expresion = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*$/;
+        
+        if(!expresion.test(nombres) && !expresion.test(apellidos))
+        {
+            
+            $(".container").after("<div class = 'alert alert-danger col-md-4 col-md-offset-4 text-center'><strong>Advertencia: </strong>Los nombres y apellidos deben ser texto</div>");
+            
+            return false;
+            
+        }
+        
+    }
+    
+    //  Validar Teléfono
+    
+    var telefono = $("#telefono").val();
+    
+    if(telefono != "")
+    {
+        
+        var expresion = /^[0-9\-\ ]*$/;
+        
+        if(!expresion.test(telefono))
+        {
+            
+            $(".container").after("<div class = 'alert alert-danger col-md-4 col-md-offset-4 text-center'><strong>Advertencia: </strong>El campo teléfono deber ser numérico</div>");
+            
+            return false;
+            
+        }
+        
+    }
+    
+    //  Validar Email
+    
+    var email = $("#email").val();
+    
+    if(email != "") 
+    {
+        
+        var expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+        
+        if(!expresion.test(email))
+        {
+            
+            $(".container").after("<div class = 'alert alert-danger col-md-4 col-md-offset-4 text-center'><strong>Advertencia: </strong>El email no es válido</div>");
+            
+            return false;
+            
+        }
+        
+    }
+    
+    return true;
+    
+}
+
 /*======  Reconocer Estudiante Repetido  ======*/
 
 
@@ -63,64 +156,71 @@ $("#documento").change(function()
 
 $("#botonRegistrarEstudiante").click(function()
 {
+    
+    //  Si valida estudiante
+    
+    if(ValidarEstudiante())
+    {
+        
+        var documento = $("#documento").val();
+        var nombres = $("#nombres").val();
+        var apellidos = $("#apellidos").val();
+        var telefono = $("#telefono").val();
+        var email = $("#email").val();
 
-	var documento = $("#documento").val();
-	var nombres = $("#nombres").val();
-	var apellidos = $("#apellidos").val();
-	var telefono = $("#telefono").val();
-	var email = $("#email").val();
+        var datos = new FormData();
 
-	var datos = new FormData();
+        datos.append("documento", documento);
+        datos.append("nombres", nombres);
+        datos.append("apellidos", apellidos);
+        datos.append("telefono", telefono);
+        datos.append("email", email);
 
-	datos.append("documento", documento);
-	datos.append("nombres", nombres);
-	datos.append("apellidos", apellidos);
-	datos.append("telefono", telefono);
-	datos.append("email", email);
+        $.ajax
+        ({
 
-	$.ajax
-	({
+            url: servidor + "/ajax/estudiantes_ajax.php",
+            method: "post",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(respuesta)
+            {
 
-		url: servidor + "/ajax/estudiantes_ajax.php",
-		method: "post",
-		data: datos,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function(respuesta)
-		{
+                if(respuesta == "Registrado")
+                {
 
-			if(respuesta == "Registrado")
-			{
+                    swal
+                    ({
 
-				swal
-				({
+                        title: "Registrado",
+                        text: "Estudiante registrado correctamente",
+                        type: "success",
+                        confirmButtonText: "Bien",
+                        confirmButtonColor: "#337ab7"
 
-					title: "Registrado",
-					text: "Estudiante registrado correctamente",
-					type: "success",
-					confirmButtonText: "Bien",
-					confirmButtonColor: "#337ab7"
-				  
-				},
+                    },
 
-				function(isConfirm)
-				{
+                    function(isConfirm)
+                    {
 
-					if(isConfirm)
-					{
+                        if(isConfirm)
+                        {
 
-						window.location = "";
+                            window.location = "";
 
-					}
+                        }
 
-				});
+                    });
 
-			}
+                }
 
-		}
+            }
 
-	})
+        })
+    
+    }
 
 })
 
@@ -208,7 +308,7 @@ $("#botonRegistrarClase").click(function()
 		contentType: false,
 		processData: false,
 		success: function(respuesta)
-		{
+		{        
 
 			if(respuesta == "Registrado")
 			{
@@ -237,6 +337,21 @@ $("#botonRegistrarClase").click(function()
 				});
 
 			}
+            else if(respuesta == "Maxima")
+            {
+            
+                swal
+				({
+
+					title: "Advertencia",
+					text: "La clase ya tiene el cupo lleno",
+					type: "error",
+					confirmButtonText: "Cerrar",
+					confirmButtonColor: "#337ab7"
+				  
+				});
+                    
+            }
 			else
 			{
 

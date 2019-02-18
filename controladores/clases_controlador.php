@@ -44,5 +44,19 @@
 			return $respuesta;
 
 		}
+        
+        /*====== Consultar Clase con número maximo de estudiantes  ======*/
+        
+        
+        public function ControladorMaximaClase($campo, $valor)
+        {
+            
+            $tabla = "clase";
+            
+            $respuesta = ModeloClases::ModeloMaximaClase($tabla, $campo, $valor);
+            
+            return $respuesta;
+            
+        }
 
 	}
